@@ -1,0 +1,62 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct tree 
+{
+    int val;
+    struct tree* left;
+    struct tree* right;
+};
+
+typedef struct tree TreeNode;
+
+TreeNode* newTree(int data)
+{
+    
+    TreeNode* root = (TreeNode*)malloc(sizeof(TreeNode));
+
+    
+    root->val = data;
+
+    
+    root->left = NULL;
+    root->right = NULL;
+    return (root);
+}
+
+void preorder(TreeNode* root)
+{
+   
+    if (root == NULL)
+        return;
+
+    
+    printf("%d ", root->val);
+
+   
+    preorder(root->left);
+
+    
+    preorder(root->right);
+}
+
+int main()
+{
+    
+    TreeNode* t = newTree(7);
+    t->left = newTree(1);
+    t->left->left = newTree(0);
+    t->left->right = newTree(3);
+    t->left->right->left = newTree(2);
+    t->left->right->right = newTree(5);
+    t->left->right->right->left = newTree(4);
+    t->left->right->right->right = newTree(6);
+    t->right = newTree(9);
+    t->right->left = newTree(8);
+    t->right->right = newTree(10);
+
+    printf("Preorder traversal of the above tree is:\n");
+    preorder(t);
+
+    return 0;
+}
